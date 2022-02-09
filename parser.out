@@ -1,0 +1,3568 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statements
+Rule 2     statements -> statements statement
+Rule 3     statements -> statement
+Rule 4     statement -> assignment
+Rule 5     statement -> print
+Rule 6     statement -> if
+Rule 7     statement -> while
+Rule 8     statement -> break
+Rule 9     statement -> for
+Rule 10    statement -> fn
+Rule 11    statement -> ret
+Rule 12    statement -> invoke
+Rule 13    statement -> class
+Rule 14    statement -> visit
+Rule 15    visit -> VARIABLE . VARIABLE
+Rule 16    class -> CLASS VARIABLE { statements }
+Rule 17    if -> IF ( condition ) { statements } elseif
+Rule 18    elseif -> ELIF ( condition ) { statements } elseif
+Rule 19    elseif -> else
+Rule 20    else -> ELSE { statements }
+Rule 21    else -> empty
+Rule 22    while -> WHILE ( conditions ) { statements }
+Rule 23    for -> FOR ( assignment ; conditions ; assignment ) { statements }
+Rule 24    conditions -> condition
+Rule 25    conditions -> condition AND condition
+Rule 26    condition -> variable LEQ variable
+Rule 27    condition -> variable < variable
+Rule 28    condition -> variable > variable
+Rule 29    condition -> variable GEQ variable
+Rule 30    condition -> variable EQ variable
+Rule 31    condition -> variable NEQ variable
+Rule 32    break -> BREAK
+Rule 33    expr -> expr + term
+Rule 34    expr -> expr - term
+Rule 35    expr -> term
+Rule 36    term -> term * factor
+Rule 37    term -> term / factor
+Rule 38    term -> term IDIV factor
+Rule 39    term -> factor
+Rule 40    factor -> variable
+Rule 41    factor -> ( expr )
+Rule 42    ret -> RETURN VARIABLE
+Rule 43    ret -> RETURN
+Rule 44    variable -> VARIABLE [ variable ]
+Rule 45    variable -> VARIABLE
+Rule 46    variable -> NUMBER
+Rule 47    variable -> STR
+Rule 48    variable -> visit
+Rule 49    assignment -> variable = expr
+Rule 50    assignment -> variable = [ agg ]
+Rule 51    assignment -> variable = LEN ( VARIABLE )
+Rule 52    assignment -> variable = VARIABLE [ VARIABLE ]
+Rule 53    assignment -> variable = VARIABLE ( agg )
+Rule 54    agg -> VARIABLE agg
+Rule 55    agg -> STR agg
+Rule 56    agg -> NUMBER agg
+Rule 57    agg -> , agg
+Rule 58    agg -> VARIABLE
+Rule 59    agg -> NUMBER
+Rule 60    agg -> STR
+Rule 61    agg -> empty
+Rule 62    print -> PRINT ( agg )
+Rule 63    fn -> DEF VARIABLE ( agg ) { statements }
+Rule 64    invoke -> VARIABLE ( agg )
+Rule 65    invoke -> VARIABLE . VARIABLE ( agg )
+Rule 66    empty -> <empty>
+
+Terminals, with rules where they appear
+
+(                    : 17 18 22 23 41 51 53 62 63 64 65
+)                    : 17 18 22 23 41 51 53 62 63 64 65
+*                    : 36
++                    : 33
+,                    : 57
+-                    : 34
+.                    : 15 65
+/                    : 37
+;                    : 23 23
+<                    : 27
+=                    : 49 50 51 52 53
+>                    : 28
+AND                  : 25
+BREAK                : 32
+CLASS                : 16
+DEF                  : 63
+ELIF                 : 18
+ELSE                 : 20
+EQ                   : 30
+FOR                  : 23
+GEQ                  : 29
+IDIV                 : 38
+IF                   : 17
+LEN                  : 51
+LEQ                  : 26
+NEQ                  : 31
+NUMBER               : 46 56 59
+PRINT                : 62
+RETURN               : 42 43
+STR                  : 47 55 60
+VARIABLE             : 15 15 16 42 44 45 51 52 52 53 54 58 63 64 65 65
+WHILE                : 22
+[                    : 44 50 52
+]                    : 44 50 52
+error                : 
+{                    : 16 17 18 20 22 23 63
+}                    : 16 17 18 20 22 23 63
+
+Nonterminals, with rules where they appear
+
+agg                  : 50 53 54 55 56 57 62 63 64 65
+assignment           : 4 23 23
+break                : 8
+class                : 13
+condition            : 17 18 24 25 25
+conditions           : 22 23
+else                 : 19
+elseif               : 17 18
+empty                : 21 61
+expr                 : 33 34 41 49
+factor               : 36 37 38 39
+fn                   : 10
+for                  : 9
+if                   : 6
+invoke               : 12
+print                : 5
+program              : 0
+ret                  : 11
+statement            : 2 3
+statements           : 1 2 16 17 18 20 22 23 63
+term                 : 33 34 35 36 37 38
+variable             : 26 26 27 27 28 28 29 29 30 30 31 31 40 44 49 50 51 52 53
+visit                : 14 48
+while                : 7
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statements
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    statements                     shift and go to state 1
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    variable                       shift and go to state 21
+    while                          shift and go to state 26
+    program                        shift and go to state 13
+    statement                      shift and go to state 14
+    print                          shift and go to state 15
+    class                          shift and go to state 22
+    fn                             shift and go to state 23
+    if                             shift and go to state 8
+
+state 1
+
+    (1) program -> statements .
+    (2) statements -> statements . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    $end            reduce using rule 1 (program -> statements .)
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    variable                       shift and go to state 21
+    while                          shift and go to state 26
+    statement                      shift and go to state 27
+    print                          shift and go to state 15
+    class                          shift and go to state 22
+    fn                             shift and go to state 23
+    if                             shift and go to state 8
+
+state 2
+
+    (46) variable -> NUMBER .
+
+    =               reduce using rule 46 (variable -> NUMBER .)
+    AND             reduce using rule 46 (variable -> NUMBER .)
+    )               reduce using rule 46 (variable -> NUMBER .)
+    ;               reduce using rule 46 (variable -> NUMBER .)
+    LEQ             reduce using rule 46 (variable -> NUMBER .)
+    <               reduce using rule 46 (variable -> NUMBER .)
+    >               reduce using rule 46 (variable -> NUMBER .)
+    GEQ             reduce using rule 46 (variable -> NUMBER .)
+    EQ              reduce using rule 46 (variable -> NUMBER .)
+    NEQ             reduce using rule 46 (variable -> NUMBER .)
+    *               reduce using rule 46 (variable -> NUMBER .)
+    /               reduce using rule 46 (variable -> NUMBER .)
+    IDIV            reduce using rule 46 (variable -> NUMBER .)
+    +               reduce using rule 46 (variable -> NUMBER .)
+    -               reduce using rule 46 (variable -> NUMBER .)
+    PRINT           reduce using rule 46 (variable -> NUMBER .)
+    IF              reduce using rule 46 (variable -> NUMBER .)
+    WHILE           reduce using rule 46 (variable -> NUMBER .)
+    BREAK           reduce using rule 46 (variable -> NUMBER .)
+    FOR             reduce using rule 46 (variable -> NUMBER .)
+    DEF             reduce using rule 46 (variable -> NUMBER .)
+    RETURN          reduce using rule 46 (variable -> NUMBER .)
+    VARIABLE        reduce using rule 46 (variable -> NUMBER .)
+    CLASS           reduce using rule 46 (variable -> NUMBER .)
+    NUMBER          reduce using rule 46 (variable -> NUMBER .)
+    STR             reduce using rule 46 (variable -> NUMBER .)
+    $end            reduce using rule 46 (variable -> NUMBER .)
+    }               reduce using rule 46 (variable -> NUMBER .)
+    ]               reduce using rule 46 (variable -> NUMBER .)
+
+
+state 3
+
+    (64) invoke -> VARIABLE . ( agg )
+    (65) invoke -> VARIABLE . . VARIABLE ( agg )
+    (15) visit -> VARIABLE . . VARIABLE
+    (44) variable -> VARIABLE . [ variable ]
+    (45) variable -> VARIABLE .
+
+    (               shift and go to state 28
+    .               shift and go to state 29
+    [               shift and go to state 30
+    =               reduce using rule 45 (variable -> VARIABLE .)
+
+
+state 4
+
+    (22) while -> WHILE . ( conditions ) { statements }
+
+    (               shift and go to state 31
+
+
+state 5
+
+    (62) print -> PRINT . ( agg )
+
+    (               shift and go to state 32
+
+
+state 6
+
+    (42) ret -> RETURN . VARIABLE
+    (43) ret -> RETURN .
+
+  ! shift/reduce conflict for VARIABLE resolved as shift
+    VARIABLE        shift and go to state 33
+    }               reduce using rule 43 (ret -> RETURN .)
+    PRINT           reduce using rule 43 (ret -> RETURN .)
+    IF              reduce using rule 43 (ret -> RETURN .)
+    WHILE           reduce using rule 43 (ret -> RETURN .)
+    BREAK           reduce using rule 43 (ret -> RETURN .)
+    FOR             reduce using rule 43 (ret -> RETURN .)
+    DEF             reduce using rule 43 (ret -> RETURN .)
+    RETURN          reduce using rule 43 (ret -> RETURN .)
+    CLASS           reduce using rule 43 (ret -> RETURN .)
+    NUMBER          reduce using rule 43 (ret -> RETURN .)
+    STR             reduce using rule 43 (ret -> RETURN .)
+    $end            reduce using rule 43 (ret -> RETURN .)
+
+  ! VARIABLE        [ reduce using rule 43 (ret -> RETURN .) ]
+
+
+state 7
+
+    (63) fn -> DEF . VARIABLE ( agg ) { statements }
+
+    VARIABLE        shift and go to state 34
+
+
+state 8
+
+    (6) statement -> if .
+
+    }               reduce using rule 6 (statement -> if .)
+    PRINT           reduce using rule 6 (statement -> if .)
+    IF              reduce using rule 6 (statement -> if .)
+    WHILE           reduce using rule 6 (statement -> if .)
+    BREAK           reduce using rule 6 (statement -> if .)
+    FOR             reduce using rule 6 (statement -> if .)
+    DEF             reduce using rule 6 (statement -> if .)
+    RETURN          reduce using rule 6 (statement -> if .)
+    VARIABLE        reduce using rule 6 (statement -> if .)
+    CLASS           reduce using rule 6 (statement -> if .)
+    NUMBER          reduce using rule 6 (statement -> if .)
+    STR             reduce using rule 6 (statement -> if .)
+    $end            reduce using rule 6 (statement -> if .)
+
+
+state 9
+
+    (23) for -> FOR . ( assignment ; conditions ; assignment ) { statements }
+
+    (               shift and go to state 35
+
+
+state 10
+
+    (9) statement -> for .
+
+    }               reduce using rule 9 (statement -> for .)
+    PRINT           reduce using rule 9 (statement -> for .)
+    IF              reduce using rule 9 (statement -> for .)
+    WHILE           reduce using rule 9 (statement -> for .)
+    BREAK           reduce using rule 9 (statement -> for .)
+    FOR             reduce using rule 9 (statement -> for .)
+    DEF             reduce using rule 9 (statement -> for .)
+    RETURN          reduce using rule 9 (statement -> for .)
+    VARIABLE        reduce using rule 9 (statement -> for .)
+    CLASS           reduce using rule 9 (statement -> for .)
+    NUMBER          reduce using rule 9 (statement -> for .)
+    STR             reduce using rule 9 (statement -> for .)
+    $end            reduce using rule 9 (statement -> for .)
+
+
+state 11
+
+    (14) statement -> visit .
+    (48) variable -> visit .
+
+    }               reduce using rule 14 (statement -> visit .)
+    PRINT           reduce using rule 14 (statement -> visit .)
+    IF              reduce using rule 14 (statement -> visit .)
+    WHILE           reduce using rule 14 (statement -> visit .)
+    BREAK           reduce using rule 14 (statement -> visit .)
+    FOR             reduce using rule 14 (statement -> visit .)
+    DEF             reduce using rule 14 (statement -> visit .)
+    RETURN          reduce using rule 14 (statement -> visit .)
+    VARIABLE        reduce using rule 14 (statement -> visit .)
+    CLASS           reduce using rule 14 (statement -> visit .)
+    NUMBER          reduce using rule 14 (statement -> visit .)
+    STR             reduce using rule 14 (statement -> visit .)
+    $end            reduce using rule 14 (statement -> visit .)
+    =               reduce using rule 48 (variable -> visit .)
+
+
+state 12
+
+    (11) statement -> ret .
+
+    }               reduce using rule 11 (statement -> ret .)
+    PRINT           reduce using rule 11 (statement -> ret .)
+    IF              reduce using rule 11 (statement -> ret .)
+    WHILE           reduce using rule 11 (statement -> ret .)
+    BREAK           reduce using rule 11 (statement -> ret .)
+    FOR             reduce using rule 11 (statement -> ret .)
+    DEF             reduce using rule 11 (statement -> ret .)
+    RETURN          reduce using rule 11 (statement -> ret .)
+    VARIABLE        reduce using rule 11 (statement -> ret .)
+    CLASS           reduce using rule 11 (statement -> ret .)
+    NUMBER          reduce using rule 11 (statement -> ret .)
+    STR             reduce using rule 11 (statement -> ret .)
+    $end            reduce using rule 11 (statement -> ret .)
+
+
+state 13
+
+    (0) S' -> program .
+
+
+
+state 14
+
+    (3) statements -> statement .
+
+    }               reduce using rule 3 (statements -> statement .)
+    PRINT           reduce using rule 3 (statements -> statement .)
+    IF              reduce using rule 3 (statements -> statement .)
+    WHILE           reduce using rule 3 (statements -> statement .)
+    BREAK           reduce using rule 3 (statements -> statement .)
+    FOR             reduce using rule 3 (statements -> statement .)
+    DEF             reduce using rule 3 (statements -> statement .)
+    RETURN          reduce using rule 3 (statements -> statement .)
+    VARIABLE        reduce using rule 3 (statements -> statement .)
+    CLASS           reduce using rule 3 (statements -> statement .)
+    NUMBER          reduce using rule 3 (statements -> statement .)
+    STR             reduce using rule 3 (statements -> statement .)
+    $end            reduce using rule 3 (statements -> statement .)
+
+
+state 15
+
+    (5) statement -> print .
+
+    }               reduce using rule 5 (statement -> print .)
+    PRINT           reduce using rule 5 (statement -> print .)
+    IF              reduce using rule 5 (statement -> print .)
+    WHILE           reduce using rule 5 (statement -> print .)
+    BREAK           reduce using rule 5 (statement -> print .)
+    FOR             reduce using rule 5 (statement -> print .)
+    DEF             reduce using rule 5 (statement -> print .)
+    RETURN          reduce using rule 5 (statement -> print .)
+    VARIABLE        reduce using rule 5 (statement -> print .)
+    CLASS           reduce using rule 5 (statement -> print .)
+    NUMBER          reduce using rule 5 (statement -> print .)
+    STR             reduce using rule 5 (statement -> print .)
+    $end            reduce using rule 5 (statement -> print .)
+
+
+state 16
+
+    (16) class -> CLASS . VARIABLE { statements }
+
+    VARIABLE        shift and go to state 36
+
+
+state 17
+
+    (12) statement -> invoke .
+
+    }               reduce using rule 12 (statement -> invoke .)
+    PRINT           reduce using rule 12 (statement -> invoke .)
+    IF              reduce using rule 12 (statement -> invoke .)
+    WHILE           reduce using rule 12 (statement -> invoke .)
+    BREAK           reduce using rule 12 (statement -> invoke .)
+    FOR             reduce using rule 12 (statement -> invoke .)
+    DEF             reduce using rule 12 (statement -> invoke .)
+    RETURN          reduce using rule 12 (statement -> invoke .)
+    VARIABLE        reduce using rule 12 (statement -> invoke .)
+    CLASS           reduce using rule 12 (statement -> invoke .)
+    NUMBER          reduce using rule 12 (statement -> invoke .)
+    STR             reduce using rule 12 (statement -> invoke .)
+    $end            reduce using rule 12 (statement -> invoke .)
+
+
+state 18
+
+    (4) statement -> assignment .
+
+    }               reduce using rule 4 (statement -> assignment .)
+    PRINT           reduce using rule 4 (statement -> assignment .)
+    IF              reduce using rule 4 (statement -> assignment .)
+    WHILE           reduce using rule 4 (statement -> assignment .)
+    BREAK           reduce using rule 4 (statement -> assignment .)
+    FOR             reduce using rule 4 (statement -> assignment .)
+    DEF             reduce using rule 4 (statement -> assignment .)
+    RETURN          reduce using rule 4 (statement -> assignment .)
+    VARIABLE        reduce using rule 4 (statement -> assignment .)
+    CLASS           reduce using rule 4 (statement -> assignment .)
+    NUMBER          reduce using rule 4 (statement -> assignment .)
+    STR             reduce using rule 4 (statement -> assignment .)
+    $end            reduce using rule 4 (statement -> assignment .)
+
+
+state 19
+
+    (8) statement -> break .
+
+    }               reduce using rule 8 (statement -> break .)
+    PRINT           reduce using rule 8 (statement -> break .)
+    IF              reduce using rule 8 (statement -> break .)
+    WHILE           reduce using rule 8 (statement -> break .)
+    BREAK           reduce using rule 8 (statement -> break .)
+    FOR             reduce using rule 8 (statement -> break .)
+    DEF             reduce using rule 8 (statement -> break .)
+    RETURN          reduce using rule 8 (statement -> break .)
+    VARIABLE        reduce using rule 8 (statement -> break .)
+    CLASS           reduce using rule 8 (statement -> break .)
+    NUMBER          reduce using rule 8 (statement -> break .)
+    STR             reduce using rule 8 (statement -> break .)
+    $end            reduce using rule 8 (statement -> break .)
+
+
+state 20
+
+    (47) variable -> STR .
+
+    =               reduce using rule 47 (variable -> STR .)
+    AND             reduce using rule 47 (variable -> STR .)
+    )               reduce using rule 47 (variable -> STR .)
+    ;               reduce using rule 47 (variable -> STR .)
+    LEQ             reduce using rule 47 (variable -> STR .)
+    <               reduce using rule 47 (variable -> STR .)
+    >               reduce using rule 47 (variable -> STR .)
+    GEQ             reduce using rule 47 (variable -> STR .)
+    EQ              reduce using rule 47 (variable -> STR .)
+    NEQ             reduce using rule 47 (variable -> STR .)
+    *               reduce using rule 47 (variable -> STR .)
+    /               reduce using rule 47 (variable -> STR .)
+    IDIV            reduce using rule 47 (variable -> STR .)
+    +               reduce using rule 47 (variable -> STR .)
+    -               reduce using rule 47 (variable -> STR .)
+    PRINT           reduce using rule 47 (variable -> STR .)
+    IF              reduce using rule 47 (variable -> STR .)
+    WHILE           reduce using rule 47 (variable -> STR .)
+    BREAK           reduce using rule 47 (variable -> STR .)
+    FOR             reduce using rule 47 (variable -> STR .)
+    DEF             reduce using rule 47 (variable -> STR .)
+    RETURN          reduce using rule 47 (variable -> STR .)
+    VARIABLE        reduce using rule 47 (variable -> STR .)
+    CLASS           reduce using rule 47 (variable -> STR .)
+    NUMBER          reduce using rule 47 (variable -> STR .)
+    STR             reduce using rule 47 (variable -> STR .)
+    $end            reduce using rule 47 (variable -> STR .)
+    }               reduce using rule 47 (variable -> STR .)
+    ]               reduce using rule 47 (variable -> STR .)
+
+
+state 21
+
+    (49) assignment -> variable . = expr
+    (50) assignment -> variable . = [ agg ]
+    (51) assignment -> variable . = LEN ( VARIABLE )
+    (52) assignment -> variable . = VARIABLE [ VARIABLE ]
+    (53) assignment -> variable . = VARIABLE ( agg )
+
+    =               shift and go to state 37
+
+
+state 22
+
+    (13) statement -> class .
+
+    }               reduce using rule 13 (statement -> class .)
+    PRINT           reduce using rule 13 (statement -> class .)
+    IF              reduce using rule 13 (statement -> class .)
+    WHILE           reduce using rule 13 (statement -> class .)
+    BREAK           reduce using rule 13 (statement -> class .)
+    FOR             reduce using rule 13 (statement -> class .)
+    DEF             reduce using rule 13 (statement -> class .)
+    RETURN          reduce using rule 13 (statement -> class .)
+    VARIABLE        reduce using rule 13 (statement -> class .)
+    CLASS           reduce using rule 13 (statement -> class .)
+    NUMBER          reduce using rule 13 (statement -> class .)
+    STR             reduce using rule 13 (statement -> class .)
+    $end            reduce using rule 13 (statement -> class .)
+
+
+state 23
+
+    (10) statement -> fn .
+
+    }               reduce using rule 10 (statement -> fn .)
+    PRINT           reduce using rule 10 (statement -> fn .)
+    IF              reduce using rule 10 (statement -> fn .)
+    WHILE           reduce using rule 10 (statement -> fn .)
+    BREAK           reduce using rule 10 (statement -> fn .)
+    FOR             reduce using rule 10 (statement -> fn .)
+    DEF             reduce using rule 10 (statement -> fn .)
+    RETURN          reduce using rule 10 (statement -> fn .)
+    VARIABLE        reduce using rule 10 (statement -> fn .)
+    CLASS           reduce using rule 10 (statement -> fn .)
+    NUMBER          reduce using rule 10 (statement -> fn .)
+    STR             reduce using rule 10 (statement -> fn .)
+    $end            reduce using rule 10 (statement -> fn .)
+
+
+state 24
+
+    (17) if -> IF . ( condition ) { statements } elseif
+
+    (               shift and go to state 38
+
+
+state 25
+
+    (32) break -> BREAK .
+
+    }               reduce using rule 32 (break -> BREAK .)
+    PRINT           reduce using rule 32 (break -> BREAK .)
+    IF              reduce using rule 32 (break -> BREAK .)
+    WHILE           reduce using rule 32 (break -> BREAK .)
+    BREAK           reduce using rule 32 (break -> BREAK .)
+    FOR             reduce using rule 32 (break -> BREAK .)
+    DEF             reduce using rule 32 (break -> BREAK .)
+    RETURN          reduce using rule 32 (break -> BREAK .)
+    VARIABLE        reduce using rule 32 (break -> BREAK .)
+    CLASS           reduce using rule 32 (break -> BREAK .)
+    NUMBER          reduce using rule 32 (break -> BREAK .)
+    STR             reduce using rule 32 (break -> BREAK .)
+    $end            reduce using rule 32 (break -> BREAK .)
+
+
+state 26
+
+    (7) statement -> while .
+
+    }               reduce using rule 7 (statement -> while .)
+    PRINT           reduce using rule 7 (statement -> while .)
+    IF              reduce using rule 7 (statement -> while .)
+    WHILE           reduce using rule 7 (statement -> while .)
+    BREAK           reduce using rule 7 (statement -> while .)
+    FOR             reduce using rule 7 (statement -> while .)
+    DEF             reduce using rule 7 (statement -> while .)
+    RETURN          reduce using rule 7 (statement -> while .)
+    VARIABLE        reduce using rule 7 (statement -> while .)
+    CLASS           reduce using rule 7 (statement -> while .)
+    NUMBER          reduce using rule 7 (statement -> while .)
+    STR             reduce using rule 7 (statement -> while .)
+    $end            reduce using rule 7 (statement -> while .)
+
+
+state 27
+
+    (2) statements -> statements statement .
+
+    }               reduce using rule 2 (statements -> statements statement .)
+    PRINT           reduce using rule 2 (statements -> statements statement .)
+    IF              reduce using rule 2 (statements -> statements statement .)
+    WHILE           reduce using rule 2 (statements -> statements statement .)
+    BREAK           reduce using rule 2 (statements -> statements statement .)
+    FOR             reduce using rule 2 (statements -> statements statement .)
+    DEF             reduce using rule 2 (statements -> statements statement .)
+    RETURN          reduce using rule 2 (statements -> statements statement .)
+    VARIABLE        reduce using rule 2 (statements -> statements statement .)
+    CLASS           reduce using rule 2 (statements -> statements statement .)
+    NUMBER          reduce using rule 2 (statements -> statements statement .)
+    STR             reduce using rule 2 (statements -> statements statement .)
+    $end            reduce using rule 2 (statements -> statements statement .)
+
+
+state 28
+
+    (64) invoke -> VARIABLE ( . agg )
+    (54) agg -> . VARIABLE agg
+    (55) agg -> . STR agg
+    (56) agg -> . NUMBER agg
+    (57) agg -> . , agg
+    (58) agg -> . VARIABLE
+    (59) agg -> . NUMBER
+    (60) agg -> . STR
+    (61) agg -> . empty
+    (66) empty -> .
+
+    VARIABLE        shift and go to state 43
+    STR             shift and go to state 42
+    NUMBER          shift and go to state 39
+    ,               shift and go to state 40
+    )               reduce using rule 66 (empty -> .)
+
+    agg                            shift and go to state 41
+    empty                          shift and go to state 44
+
+state 29
+
+    (65) invoke -> VARIABLE . . VARIABLE ( agg )
+    (15) visit -> VARIABLE . . VARIABLE
+
+    VARIABLE        shift and go to state 45
+
+
+state 30
+
+    (44) variable -> VARIABLE [ . variable ]
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 47
+    visit                          shift and go to state 46
+
+state 31
+
+    (22) while -> WHILE ( . conditions ) { statements }
+    (24) conditions -> . condition
+    (25) conditions -> . condition AND condition
+    (26) condition -> . variable LEQ variable
+    (27) condition -> . variable < variable
+    (28) condition -> . variable > variable
+    (29) condition -> . variable GEQ variable
+    (30) condition -> . variable EQ variable
+    (31) condition -> . variable NEQ variable
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 49
+    conditions                     shift and go to state 50
+    condition                      shift and go to state 51
+    visit                          shift and go to state 46
+
+state 32
+
+    (62) print -> PRINT ( . agg )
+    (54) agg -> . VARIABLE agg
+    (55) agg -> . STR agg
+    (56) agg -> . NUMBER agg
+    (57) agg -> . , agg
+    (58) agg -> . VARIABLE
+    (59) agg -> . NUMBER
+    (60) agg -> . STR
+    (61) agg -> . empty
+    (66) empty -> .
+
+    VARIABLE        shift and go to state 43
+    STR             shift and go to state 42
+    NUMBER          shift and go to state 39
+    ,               shift and go to state 40
+    )               reduce using rule 66 (empty -> .)
+
+    agg                            shift and go to state 52
+    empty                          shift and go to state 44
+
+state 33
+
+    (42) ret -> RETURN VARIABLE .
+
+    }               reduce using rule 42 (ret -> RETURN VARIABLE .)
+    PRINT           reduce using rule 42 (ret -> RETURN VARIABLE .)
+    IF              reduce using rule 42 (ret -> RETURN VARIABLE .)
+    WHILE           reduce using rule 42 (ret -> RETURN VARIABLE .)
+    BREAK           reduce using rule 42 (ret -> RETURN VARIABLE .)
+    FOR             reduce using rule 42 (ret -> RETURN VARIABLE .)
+    DEF             reduce using rule 42 (ret -> RETURN VARIABLE .)
+    RETURN          reduce using rule 42 (ret -> RETURN VARIABLE .)
+    VARIABLE        reduce using rule 42 (ret -> RETURN VARIABLE .)
+    CLASS           reduce using rule 42 (ret -> RETURN VARIABLE .)
+    NUMBER          reduce using rule 42 (ret -> RETURN VARIABLE .)
+    STR             reduce using rule 42 (ret -> RETURN VARIABLE .)
+    $end            reduce using rule 42 (ret -> RETURN VARIABLE .)
+
+
+state 34
+
+    (63) fn -> DEF VARIABLE . ( agg ) { statements }
+
+    (               shift and go to state 53
+
+
+state 35
+
+    (23) for -> FOR ( . assignment ; conditions ; assignment ) { statements }
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    assignment                     shift and go to state 54
+    visit                          shift and go to state 46
+    variable                       shift and go to state 21
+
+state 36
+
+    (16) class -> CLASS VARIABLE . { statements }
+
+    {               shift and go to state 55
+
+
+state 37
+
+    (49) assignment -> variable = . expr
+    (50) assignment -> variable = . [ agg ]
+    (51) assignment -> variable = . LEN ( VARIABLE )
+    (52) assignment -> variable = . VARIABLE [ VARIABLE ]
+    (53) assignment -> variable = . VARIABLE ( agg )
+    (33) expr -> . expr + term
+    (34) expr -> . expr - term
+    (35) expr -> . term
+    (36) term -> . term * factor
+    (37) term -> . term / factor
+    (38) term -> . term IDIV factor
+    (39) term -> . factor
+    (40) factor -> . variable
+    (41) factor -> . ( expr )
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    [               shift and go to state 63
+    LEN             shift and go to state 58
+    VARIABLE        shift and go to state 59
+    (               shift and go to state 60
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    term                           shift and go to state 56
+    expr                           shift and go to state 57
+    visit                          shift and go to state 46
+    factor                         shift and go to state 62
+    variable                       shift and go to state 61
+
+state 38
+
+    (17) if -> IF ( . condition ) { statements } elseif
+    (26) condition -> . variable LEQ variable
+    (27) condition -> . variable < variable
+    (28) condition -> . variable > variable
+    (29) condition -> . variable GEQ variable
+    (30) condition -> . variable EQ variable
+    (31) condition -> . variable NEQ variable
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 49
+    condition                      shift and go to state 64
+    visit                          shift and go to state 46
+
+state 39
+
+    (56) agg -> NUMBER . agg
+    (59) agg -> NUMBER .
+    (54) agg -> . VARIABLE agg
+    (55) agg -> . STR agg
+    (56) agg -> . NUMBER agg
+    (57) agg -> . , agg
+    (58) agg -> . VARIABLE
+    (59) agg -> . NUMBER
+    (60) agg -> . STR
+    (61) agg -> . empty
+    (66) empty -> .
+
+  ! reduce/reduce conflict for ) resolved using rule 59 (agg -> NUMBER .)
+  ! reduce/reduce conflict for ] resolved using rule 59 (agg -> NUMBER .)
+    )               reduce using rule 59 (agg -> NUMBER .)
+    ]               reduce using rule 59 (agg -> NUMBER .)
+    VARIABLE        shift and go to state 43
+    STR             shift and go to state 42
+    NUMBER          shift and go to state 39
+    ,               shift and go to state 40
+
+  ! )               [ reduce using rule 66 (empty -> .) ]
+  ! ]               [ reduce using rule 66 (empty -> .) ]
+
+    agg                            shift and go to state 65
+    empty                          shift and go to state 44
+
+state 40
+
+    (57) agg -> , . agg
+    (54) agg -> . VARIABLE agg
+    (55) agg -> . STR agg
+    (56) agg -> . NUMBER agg
+    (57) agg -> . , agg
+    (58) agg -> . VARIABLE
+    (59) agg -> . NUMBER
+    (60) agg -> . STR
+    (61) agg -> . empty
+    (66) empty -> .
+
+    VARIABLE        shift and go to state 43
+    STR             shift and go to state 42
+    NUMBER          shift and go to state 39
+    ,               shift and go to state 40
+    )               reduce using rule 66 (empty -> .)
+    ]               reduce using rule 66 (empty -> .)
+
+    agg                            shift and go to state 66
+    empty                          shift and go to state 44
+
+state 41
+
+    (64) invoke -> VARIABLE ( agg . )
+
+    )               shift and go to state 67
+
+
+state 42
+
+    (55) agg -> STR . agg
+    (60) agg -> STR .
+    (54) agg -> . VARIABLE agg
+    (55) agg -> . STR agg
+    (56) agg -> . NUMBER agg
+    (57) agg -> . , agg
+    (58) agg -> . VARIABLE
+    (59) agg -> . NUMBER
+    (60) agg -> . STR
+    (61) agg -> . empty
+    (66) empty -> .
+
+  ! reduce/reduce conflict for ) resolved using rule 60 (agg -> STR .)
+  ! reduce/reduce conflict for ] resolved using rule 60 (agg -> STR .)
+    )               reduce using rule 60 (agg -> STR .)
+    ]               reduce using rule 60 (agg -> STR .)
+    VARIABLE        shift and go to state 43
+    STR             shift and go to state 42
+    NUMBER          shift and go to state 39
+    ,               shift and go to state 40
+
+  ! )               [ reduce using rule 66 (empty -> .) ]
+  ! ]               [ reduce using rule 66 (empty -> .) ]
+
+    agg                            shift and go to state 68
+    empty                          shift and go to state 44
+
+state 43
+
+    (54) agg -> VARIABLE . agg
+    (58) agg -> VARIABLE .
+    (54) agg -> . VARIABLE agg
+    (55) agg -> . STR agg
+    (56) agg -> . NUMBER agg
+    (57) agg -> . , agg
+    (58) agg -> . VARIABLE
+    (59) agg -> . NUMBER
+    (60) agg -> . STR
+    (61) agg -> . empty
+    (66) empty -> .
+
+  ! reduce/reduce conflict for ) resolved using rule 58 (agg -> VARIABLE .)
+  ! reduce/reduce conflict for ] resolved using rule 58 (agg -> VARIABLE .)
+    )               reduce using rule 58 (agg -> VARIABLE .)
+    ]               reduce using rule 58 (agg -> VARIABLE .)
+    VARIABLE        shift and go to state 43
+    STR             shift and go to state 42
+    NUMBER          shift and go to state 39
+    ,               shift and go to state 40
+
+  ! )               [ reduce using rule 66 (empty -> .) ]
+  ! ]               [ reduce using rule 66 (empty -> .) ]
+
+    agg                            shift and go to state 69
+    empty                          shift and go to state 44
+
+state 44
+
+    (61) agg -> empty .
+
+    )               reduce using rule 61 (agg -> empty .)
+    ]               reduce using rule 61 (agg -> empty .)
+
+
+state 45
+
+    (65) invoke -> VARIABLE . VARIABLE . ( agg )
+    (15) visit -> VARIABLE . VARIABLE .
+
+    (               shift and go to state 70
+    }               reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    PRINT           reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    IF              reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    WHILE           reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    BREAK           reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    FOR             reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    DEF             reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    RETURN          reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    VARIABLE        reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    CLASS           reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    NUMBER          reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    STR             reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    =               reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    $end            reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+
+
+state 46
+
+    (48) variable -> visit .
+
+    AND             reduce using rule 48 (variable -> visit .)
+    )               reduce using rule 48 (variable -> visit .)
+    ;               reduce using rule 48 (variable -> visit .)
+    =               reduce using rule 48 (variable -> visit .)
+    LEQ             reduce using rule 48 (variable -> visit .)
+    <               reduce using rule 48 (variable -> visit .)
+    >               reduce using rule 48 (variable -> visit .)
+    GEQ             reduce using rule 48 (variable -> visit .)
+    EQ              reduce using rule 48 (variable -> visit .)
+    NEQ             reduce using rule 48 (variable -> visit .)
+    *               reduce using rule 48 (variable -> visit .)
+    /               reduce using rule 48 (variable -> visit .)
+    IDIV            reduce using rule 48 (variable -> visit .)
+    +               reduce using rule 48 (variable -> visit .)
+    -               reduce using rule 48 (variable -> visit .)
+    PRINT           reduce using rule 48 (variable -> visit .)
+    IF              reduce using rule 48 (variable -> visit .)
+    WHILE           reduce using rule 48 (variable -> visit .)
+    BREAK           reduce using rule 48 (variable -> visit .)
+    FOR             reduce using rule 48 (variable -> visit .)
+    DEF             reduce using rule 48 (variable -> visit .)
+    RETURN          reduce using rule 48 (variable -> visit .)
+    VARIABLE        reduce using rule 48 (variable -> visit .)
+    CLASS           reduce using rule 48 (variable -> visit .)
+    NUMBER          reduce using rule 48 (variable -> visit .)
+    STR             reduce using rule 48 (variable -> visit .)
+    $end            reduce using rule 48 (variable -> visit .)
+    }               reduce using rule 48 (variable -> visit .)
+    ]               reduce using rule 48 (variable -> visit .)
+
+
+state 47
+
+    (44) variable -> VARIABLE [ variable . ]
+
+    ]               shift and go to state 71
+
+
+state 48
+
+    (44) variable -> VARIABLE . [ variable ]
+    (45) variable -> VARIABLE .
+    (15) visit -> VARIABLE . . VARIABLE
+
+    [               shift and go to state 30
+    AND             reduce using rule 45 (variable -> VARIABLE .)
+    )               reduce using rule 45 (variable -> VARIABLE .)
+    ;               reduce using rule 45 (variable -> VARIABLE .)
+    =               reduce using rule 45 (variable -> VARIABLE .)
+    LEQ             reduce using rule 45 (variable -> VARIABLE .)
+    <               reduce using rule 45 (variable -> VARIABLE .)
+    >               reduce using rule 45 (variable -> VARIABLE .)
+    GEQ             reduce using rule 45 (variable -> VARIABLE .)
+    EQ              reduce using rule 45 (variable -> VARIABLE .)
+    NEQ             reduce using rule 45 (variable -> VARIABLE .)
+    *               reduce using rule 45 (variable -> VARIABLE .)
+    /               reduce using rule 45 (variable -> VARIABLE .)
+    IDIV            reduce using rule 45 (variable -> VARIABLE .)
+    +               reduce using rule 45 (variable -> VARIABLE .)
+    -               reduce using rule 45 (variable -> VARIABLE .)
+    PRINT           reduce using rule 45 (variable -> VARIABLE .)
+    IF              reduce using rule 45 (variable -> VARIABLE .)
+    WHILE           reduce using rule 45 (variable -> VARIABLE .)
+    BREAK           reduce using rule 45 (variable -> VARIABLE .)
+    FOR             reduce using rule 45 (variable -> VARIABLE .)
+    DEF             reduce using rule 45 (variable -> VARIABLE .)
+    RETURN          reduce using rule 45 (variable -> VARIABLE .)
+    VARIABLE        reduce using rule 45 (variable -> VARIABLE .)
+    CLASS           reduce using rule 45 (variable -> VARIABLE .)
+    NUMBER          reduce using rule 45 (variable -> VARIABLE .)
+    STR             reduce using rule 45 (variable -> VARIABLE .)
+    $end            reduce using rule 45 (variable -> VARIABLE .)
+    }               reduce using rule 45 (variable -> VARIABLE .)
+    ]               reduce using rule 45 (variable -> VARIABLE .)
+    .               shift and go to state 72
+
+
+state 49
+
+    (26) condition -> variable . LEQ variable
+    (27) condition -> variable . < variable
+    (28) condition -> variable . > variable
+    (29) condition -> variable . GEQ variable
+    (30) condition -> variable . EQ variable
+    (31) condition -> variable . NEQ variable
+
+    LEQ             shift and go to state 74
+    <               shift and go to state 77
+    >               shift and go to state 78
+    GEQ             shift and go to state 73
+    EQ              shift and go to state 76
+    NEQ             shift and go to state 75
+
+
+state 50
+
+    (22) while -> WHILE ( conditions . ) { statements }
+
+    )               shift and go to state 79
+
+
+state 51
+
+    (24) conditions -> condition .
+    (25) conditions -> condition . AND condition
+
+    ;               reduce using rule 24 (conditions -> condition .)
+    )               reduce using rule 24 (conditions -> condition .)
+    AND             shift and go to state 80
+
+
+state 52
+
+    (62) print -> PRINT ( agg . )
+
+    )               shift and go to state 81
+
+
+state 53
+
+    (63) fn -> DEF VARIABLE ( . agg ) { statements }
+    (54) agg -> . VARIABLE agg
+    (55) agg -> . STR agg
+    (56) agg -> . NUMBER agg
+    (57) agg -> . , agg
+    (58) agg -> . VARIABLE
+    (59) agg -> . NUMBER
+    (60) agg -> . STR
+    (61) agg -> . empty
+    (66) empty -> .
+
+    VARIABLE        shift and go to state 43
+    STR             shift and go to state 42
+    NUMBER          shift and go to state 39
+    ,               shift and go to state 40
+    )               reduce using rule 66 (empty -> .)
+
+    agg                            shift and go to state 82
+    empty                          shift and go to state 44
+
+state 54
+
+    (23) for -> FOR ( assignment . ; conditions ; assignment ) { statements }
+
+    ;               shift and go to state 83
+
+
+state 55
+
+    (16) class -> CLASS VARIABLE { . statements }
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    statements                     shift and go to state 84
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    variable                       shift and go to state 21
+    while                          shift and go to state 26
+    statement                      shift and go to state 14
+    print                          shift and go to state 15
+    class                          shift and go to state 22
+    fn                             shift and go to state 23
+    if                             shift and go to state 8
+
+state 56
+
+    (35) expr -> term .
+    (36) term -> term . * factor
+    (37) term -> term . / factor
+    (38) term -> term . IDIV factor
+
+    +               reduce using rule 35 (expr -> term .)
+    -               reduce using rule 35 (expr -> term .)
+    PRINT           reduce using rule 35 (expr -> term .)
+    IF              reduce using rule 35 (expr -> term .)
+    WHILE           reduce using rule 35 (expr -> term .)
+    BREAK           reduce using rule 35 (expr -> term .)
+    FOR             reduce using rule 35 (expr -> term .)
+    DEF             reduce using rule 35 (expr -> term .)
+    RETURN          reduce using rule 35 (expr -> term .)
+    VARIABLE        reduce using rule 35 (expr -> term .)
+    CLASS           reduce using rule 35 (expr -> term .)
+    NUMBER          reduce using rule 35 (expr -> term .)
+    STR             reduce using rule 35 (expr -> term .)
+    $end            reduce using rule 35 (expr -> term .)
+    ;               reduce using rule 35 (expr -> term .)
+    }               reduce using rule 35 (expr -> term .)
+    )               reduce using rule 35 (expr -> term .)
+    *               shift and go to state 85
+    /               shift and go to state 87
+    IDIV            shift and go to state 86
+
+
+state 57
+
+    (49) assignment -> variable = expr .
+    (33) expr -> expr . + term
+    (34) expr -> expr . - term
+
+    }               reduce using rule 49 (assignment -> variable = expr .)
+    PRINT           reduce using rule 49 (assignment -> variable = expr .)
+    IF              reduce using rule 49 (assignment -> variable = expr .)
+    WHILE           reduce using rule 49 (assignment -> variable = expr .)
+    BREAK           reduce using rule 49 (assignment -> variable = expr .)
+    FOR             reduce using rule 49 (assignment -> variable = expr .)
+    DEF             reduce using rule 49 (assignment -> variable = expr .)
+    RETURN          reduce using rule 49 (assignment -> variable = expr .)
+    VARIABLE        reduce using rule 49 (assignment -> variable = expr .)
+    CLASS           reduce using rule 49 (assignment -> variable = expr .)
+    NUMBER          reduce using rule 49 (assignment -> variable = expr .)
+    STR             reduce using rule 49 (assignment -> variable = expr .)
+    $end            reduce using rule 49 (assignment -> variable = expr .)
+    ;               reduce using rule 49 (assignment -> variable = expr .)
+    )               reduce using rule 49 (assignment -> variable = expr .)
+    +               shift and go to state 88
+    -               shift and go to state 89
+
+
+state 58
+
+    (51) assignment -> variable = LEN . ( VARIABLE )
+
+    (               shift and go to state 90
+
+
+state 59
+
+    (52) assignment -> variable = VARIABLE . [ VARIABLE ]
+    (53) assignment -> variable = VARIABLE . ( agg )
+    (44) variable -> VARIABLE . [ variable ]
+    (45) variable -> VARIABLE .
+    (15) visit -> VARIABLE . . VARIABLE
+
+    [               shift and go to state 92
+    (               shift and go to state 91
+    *               reduce using rule 45 (variable -> VARIABLE .)
+    /               reduce using rule 45 (variable -> VARIABLE .)
+    IDIV            reduce using rule 45 (variable -> VARIABLE .)
+    +               reduce using rule 45 (variable -> VARIABLE .)
+    -               reduce using rule 45 (variable -> VARIABLE .)
+    PRINT           reduce using rule 45 (variable -> VARIABLE .)
+    IF              reduce using rule 45 (variable -> VARIABLE .)
+    WHILE           reduce using rule 45 (variable -> VARIABLE .)
+    BREAK           reduce using rule 45 (variable -> VARIABLE .)
+    FOR             reduce using rule 45 (variable -> VARIABLE .)
+    DEF             reduce using rule 45 (variable -> VARIABLE .)
+    RETURN          reduce using rule 45 (variable -> VARIABLE .)
+    VARIABLE        reduce using rule 45 (variable -> VARIABLE .)
+    CLASS           reduce using rule 45 (variable -> VARIABLE .)
+    NUMBER          reduce using rule 45 (variable -> VARIABLE .)
+    STR             reduce using rule 45 (variable -> VARIABLE .)
+    $end            reduce using rule 45 (variable -> VARIABLE .)
+    ;               reduce using rule 45 (variable -> VARIABLE .)
+    }               reduce using rule 45 (variable -> VARIABLE .)
+    )               reduce using rule 45 (variable -> VARIABLE .)
+    .               shift and go to state 72
+
+
+state 60
+
+    (41) factor -> ( . expr )
+    (33) expr -> . expr + term
+    (34) expr -> . expr - term
+    (35) expr -> . term
+    (36) term -> . term * factor
+    (37) term -> . term / factor
+    (38) term -> . term IDIV factor
+    (39) term -> . factor
+    (40) factor -> . variable
+    (41) factor -> . ( expr )
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    (               shift and go to state 60
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 61
+    expr                           shift and go to state 93
+    term                           shift and go to state 56
+    visit                          shift and go to state 46
+    factor                         shift and go to state 62
+
+state 61
+
+    (40) factor -> variable .
+
+    *               reduce using rule 40 (factor -> variable .)
+    /               reduce using rule 40 (factor -> variable .)
+    IDIV            reduce using rule 40 (factor -> variable .)
+    +               reduce using rule 40 (factor -> variable .)
+    -               reduce using rule 40 (factor -> variable .)
+    PRINT           reduce using rule 40 (factor -> variable .)
+    IF              reduce using rule 40 (factor -> variable .)
+    WHILE           reduce using rule 40 (factor -> variable .)
+    BREAK           reduce using rule 40 (factor -> variable .)
+    FOR             reduce using rule 40 (factor -> variable .)
+    DEF             reduce using rule 40 (factor -> variable .)
+    RETURN          reduce using rule 40 (factor -> variable .)
+    VARIABLE        reduce using rule 40 (factor -> variable .)
+    CLASS           reduce using rule 40 (factor -> variable .)
+    NUMBER          reduce using rule 40 (factor -> variable .)
+    STR             reduce using rule 40 (factor -> variable .)
+    $end            reduce using rule 40 (factor -> variable .)
+    ;               reduce using rule 40 (factor -> variable .)
+    }               reduce using rule 40 (factor -> variable .)
+    )               reduce using rule 40 (factor -> variable .)
+
+
+state 62
+
+    (39) term -> factor .
+
+    *               reduce using rule 39 (term -> factor .)
+    /               reduce using rule 39 (term -> factor .)
+    IDIV            reduce using rule 39 (term -> factor .)
+    +               reduce using rule 39 (term -> factor .)
+    -               reduce using rule 39 (term -> factor .)
+    PRINT           reduce using rule 39 (term -> factor .)
+    IF              reduce using rule 39 (term -> factor .)
+    WHILE           reduce using rule 39 (term -> factor .)
+    BREAK           reduce using rule 39 (term -> factor .)
+    FOR             reduce using rule 39 (term -> factor .)
+    DEF             reduce using rule 39 (term -> factor .)
+    RETURN          reduce using rule 39 (term -> factor .)
+    VARIABLE        reduce using rule 39 (term -> factor .)
+    CLASS           reduce using rule 39 (term -> factor .)
+    NUMBER          reduce using rule 39 (term -> factor .)
+    STR             reduce using rule 39 (term -> factor .)
+    $end            reduce using rule 39 (term -> factor .)
+    ;               reduce using rule 39 (term -> factor .)
+    }               reduce using rule 39 (term -> factor .)
+    )               reduce using rule 39 (term -> factor .)
+
+
+state 63
+
+    (50) assignment -> variable = [ . agg ]
+    (54) agg -> . VARIABLE agg
+    (55) agg -> . STR agg
+    (56) agg -> . NUMBER agg
+    (57) agg -> . , agg
+    (58) agg -> . VARIABLE
+    (59) agg -> . NUMBER
+    (60) agg -> . STR
+    (61) agg -> . empty
+    (66) empty -> .
+
+    VARIABLE        shift and go to state 43
+    STR             shift and go to state 42
+    NUMBER          shift and go to state 39
+    ,               shift and go to state 40
+    ]               reduce using rule 66 (empty -> .)
+
+    agg                            shift and go to state 94
+    empty                          shift and go to state 44
+
+state 64
+
+    (17) if -> IF ( condition . ) { statements } elseif
+
+    )               shift and go to state 95
+
+
+state 65
+
+    (56) agg -> NUMBER agg .
+
+    )               reduce using rule 56 (agg -> NUMBER agg .)
+    ]               reduce using rule 56 (agg -> NUMBER agg .)
+
+
+state 66
+
+    (57) agg -> , agg .
+
+    )               reduce using rule 57 (agg -> , agg .)
+    ]               reduce using rule 57 (agg -> , agg .)
+
+
+state 67
+
+    (64) invoke -> VARIABLE ( agg ) .
+
+    }               reduce using rule 64 (invoke -> VARIABLE ( agg ) .)
+    PRINT           reduce using rule 64 (invoke -> VARIABLE ( agg ) .)
+    IF              reduce using rule 64 (invoke -> VARIABLE ( agg ) .)
+    WHILE           reduce using rule 64 (invoke -> VARIABLE ( agg ) .)
+    BREAK           reduce using rule 64 (invoke -> VARIABLE ( agg ) .)
+    FOR             reduce using rule 64 (invoke -> VARIABLE ( agg ) .)
+    DEF             reduce using rule 64 (invoke -> VARIABLE ( agg ) .)
+    RETURN          reduce using rule 64 (invoke -> VARIABLE ( agg ) .)
+    VARIABLE        reduce using rule 64 (invoke -> VARIABLE ( agg ) .)
+    CLASS           reduce using rule 64 (invoke -> VARIABLE ( agg ) .)
+    NUMBER          reduce using rule 64 (invoke -> VARIABLE ( agg ) .)
+    STR             reduce using rule 64 (invoke -> VARIABLE ( agg ) .)
+    $end            reduce using rule 64 (invoke -> VARIABLE ( agg ) .)
+
+
+state 68
+
+    (55) agg -> STR agg .
+
+    )               reduce using rule 55 (agg -> STR agg .)
+    ]               reduce using rule 55 (agg -> STR agg .)
+
+
+state 69
+
+    (54) agg -> VARIABLE agg .
+
+    )               reduce using rule 54 (agg -> VARIABLE agg .)
+    ]               reduce using rule 54 (agg -> VARIABLE agg .)
+
+
+state 70
+
+    (65) invoke -> VARIABLE . VARIABLE ( . agg )
+    (54) agg -> . VARIABLE agg
+    (55) agg -> . STR agg
+    (56) agg -> . NUMBER agg
+    (57) agg -> . , agg
+    (58) agg -> . VARIABLE
+    (59) agg -> . NUMBER
+    (60) agg -> . STR
+    (61) agg -> . empty
+    (66) empty -> .
+
+    VARIABLE        shift and go to state 43
+    STR             shift and go to state 42
+    NUMBER          shift and go to state 39
+    ,               shift and go to state 40
+    )               reduce using rule 66 (empty -> .)
+
+    agg                            shift and go to state 96
+    empty                          shift and go to state 44
+
+state 71
+
+    (44) variable -> VARIABLE [ variable ] .
+
+    =               reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    AND             reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    )               reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    ;               reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    LEQ             reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    <               reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    >               reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    GEQ             reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    EQ              reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    NEQ             reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    *               reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    /               reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    IDIV            reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    +               reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    -               reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    PRINT           reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    IF              reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    WHILE           reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    BREAK           reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    FOR             reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    DEF             reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    RETURN          reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    VARIABLE        reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    CLASS           reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    NUMBER          reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    STR             reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    $end            reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    }               reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+    ]               reduce using rule 44 (variable -> VARIABLE [ variable ] .)
+
+
+state 72
+
+    (15) visit -> VARIABLE . . VARIABLE
+
+    VARIABLE        shift and go to state 97
+
+
+state 73
+
+    (29) condition -> variable GEQ . variable
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 98
+    visit                          shift and go to state 46
+
+state 74
+
+    (26) condition -> variable LEQ . variable
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 99
+    visit                          shift and go to state 46
+
+state 75
+
+    (31) condition -> variable NEQ . variable
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 100
+    visit                          shift and go to state 46
+
+state 76
+
+    (30) condition -> variable EQ . variable
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 101
+    visit                          shift and go to state 46
+
+state 77
+
+    (27) condition -> variable < . variable
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 102
+    visit                          shift and go to state 46
+
+state 78
+
+    (28) condition -> variable > . variable
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 103
+    visit                          shift and go to state 46
+
+state 79
+
+    (22) while -> WHILE ( conditions ) . { statements }
+
+    {               shift and go to state 104
+
+
+state 80
+
+    (25) conditions -> condition AND . condition
+    (26) condition -> . variable LEQ variable
+    (27) condition -> . variable < variable
+    (28) condition -> . variable > variable
+    (29) condition -> . variable GEQ variable
+    (30) condition -> . variable EQ variable
+    (31) condition -> . variable NEQ variable
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 49
+    visit                          shift and go to state 46
+    condition                      shift and go to state 105
+
+state 81
+
+    (62) print -> PRINT ( agg ) .
+
+    }               reduce using rule 62 (print -> PRINT ( agg ) .)
+    PRINT           reduce using rule 62 (print -> PRINT ( agg ) .)
+    IF              reduce using rule 62 (print -> PRINT ( agg ) .)
+    WHILE           reduce using rule 62 (print -> PRINT ( agg ) .)
+    BREAK           reduce using rule 62 (print -> PRINT ( agg ) .)
+    FOR             reduce using rule 62 (print -> PRINT ( agg ) .)
+    DEF             reduce using rule 62 (print -> PRINT ( agg ) .)
+    RETURN          reduce using rule 62 (print -> PRINT ( agg ) .)
+    VARIABLE        reduce using rule 62 (print -> PRINT ( agg ) .)
+    CLASS           reduce using rule 62 (print -> PRINT ( agg ) .)
+    NUMBER          reduce using rule 62 (print -> PRINT ( agg ) .)
+    STR             reduce using rule 62 (print -> PRINT ( agg ) .)
+    $end            reduce using rule 62 (print -> PRINT ( agg ) .)
+
+
+state 82
+
+    (63) fn -> DEF VARIABLE ( agg . ) { statements }
+
+    )               shift and go to state 106
+
+
+state 83
+
+    (23) for -> FOR ( assignment ; . conditions ; assignment ) { statements }
+    (24) conditions -> . condition
+    (25) conditions -> . condition AND condition
+    (26) condition -> . variable LEQ variable
+    (27) condition -> . variable < variable
+    (28) condition -> . variable > variable
+    (29) condition -> . variable GEQ variable
+    (30) condition -> . variable EQ variable
+    (31) condition -> . variable NEQ variable
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    visit                          shift and go to state 46
+    variable                       shift and go to state 49
+    conditions                     shift and go to state 107
+    condition                      shift and go to state 51
+
+state 84
+
+    (16) class -> CLASS VARIABLE { statements . }
+    (2) statements -> statements . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    }               shift and go to state 108
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    variable                       shift and go to state 21
+    while                          shift and go to state 26
+    statement                      shift and go to state 27
+    print                          shift and go to state 15
+    class                          shift and go to state 22
+    fn                             shift and go to state 23
+    if                             shift and go to state 8
+
+state 85
+
+    (36) term -> term * . factor
+    (40) factor -> . variable
+    (41) factor -> . ( expr )
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    (               shift and go to state 60
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 61
+    visit                          shift and go to state 46
+    factor                         shift and go to state 109
+
+state 86
+
+    (38) term -> term IDIV . factor
+    (40) factor -> . variable
+    (41) factor -> . ( expr )
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    (               shift and go to state 60
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 61
+    visit                          shift and go to state 46
+    factor                         shift and go to state 110
+
+state 87
+
+    (37) term -> term / . factor
+    (40) factor -> . variable
+    (41) factor -> . ( expr )
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    (               shift and go to state 60
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 61
+    visit                          shift and go to state 46
+    factor                         shift and go to state 111
+
+state 88
+
+    (33) expr -> expr + . term
+    (36) term -> . term * factor
+    (37) term -> . term / factor
+    (38) term -> . term IDIV factor
+    (39) term -> . factor
+    (40) factor -> . variable
+    (41) factor -> . ( expr )
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    (               shift and go to state 60
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 61
+    term                           shift and go to state 112
+    visit                          shift and go to state 46
+    factor                         shift and go to state 62
+
+state 89
+
+    (34) expr -> expr - . term
+    (36) term -> . term * factor
+    (37) term -> . term / factor
+    (38) term -> . term IDIV factor
+    (39) term -> . factor
+    (40) factor -> . variable
+    (41) factor -> . ( expr )
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    (               shift and go to state 60
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 61
+    term                           shift and go to state 113
+    visit                          shift and go to state 46
+    factor                         shift and go to state 62
+
+state 90
+
+    (51) assignment -> variable = LEN ( . VARIABLE )
+
+    VARIABLE        shift and go to state 114
+
+
+state 91
+
+    (53) assignment -> variable = VARIABLE ( . agg )
+    (54) agg -> . VARIABLE agg
+    (55) agg -> . STR agg
+    (56) agg -> . NUMBER agg
+    (57) agg -> . , agg
+    (58) agg -> . VARIABLE
+    (59) agg -> . NUMBER
+    (60) agg -> . STR
+    (61) agg -> . empty
+    (66) empty -> .
+
+    VARIABLE        shift and go to state 43
+    STR             shift and go to state 42
+    NUMBER          shift and go to state 39
+    ,               shift and go to state 40
+    )               reduce using rule 66 (empty -> .)
+
+    agg                            shift and go to state 115
+    empty                          shift and go to state 44
+
+state 92
+
+    (52) assignment -> variable = VARIABLE [ . VARIABLE ]
+    (44) variable -> VARIABLE [ . variable ]
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 116
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 47
+    visit                          shift and go to state 46
+
+state 93
+
+    (41) factor -> ( expr . )
+    (33) expr -> expr . + term
+    (34) expr -> expr . - term
+
+    )               shift and go to state 117
+    +               shift and go to state 88
+    -               shift and go to state 89
+
+
+state 94
+
+    (50) assignment -> variable = [ agg . ]
+
+    ]               shift and go to state 118
+
+
+state 95
+
+    (17) if -> IF ( condition ) . { statements } elseif
+
+    {               shift and go to state 119
+
+
+state 96
+
+    (65) invoke -> VARIABLE . VARIABLE ( agg . )
+
+    )               shift and go to state 120
+
+
+state 97
+
+    (15) visit -> VARIABLE . VARIABLE .
+
+    AND             reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    )               reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    ;               reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    *               reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    /               reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    IDIV            reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    +               reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    -               reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    PRINT           reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    IF              reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    WHILE           reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    BREAK           reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    FOR             reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    DEF             reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    RETURN          reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    VARIABLE        reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    CLASS           reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    NUMBER          reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    STR             reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    $end            reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    }               reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    ]               reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    =               reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    LEQ             reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    <               reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    >               reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    GEQ             reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    EQ              reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+    NEQ             reduce using rule 15 (visit -> VARIABLE . VARIABLE .)
+
+
+state 98
+
+    (29) condition -> variable GEQ variable .
+
+    )               reduce using rule 29 (condition -> variable GEQ variable .)
+    ;               reduce using rule 29 (condition -> variable GEQ variable .)
+    AND             reduce using rule 29 (condition -> variable GEQ variable .)
+
+
+state 99
+
+    (26) condition -> variable LEQ variable .
+
+    )               reduce using rule 26 (condition -> variable LEQ variable .)
+    ;               reduce using rule 26 (condition -> variable LEQ variable .)
+    AND             reduce using rule 26 (condition -> variable LEQ variable .)
+
+
+state 100
+
+    (31) condition -> variable NEQ variable .
+
+    )               reduce using rule 31 (condition -> variable NEQ variable .)
+    ;               reduce using rule 31 (condition -> variable NEQ variable .)
+    AND             reduce using rule 31 (condition -> variable NEQ variable .)
+
+
+state 101
+
+    (30) condition -> variable EQ variable .
+
+    )               reduce using rule 30 (condition -> variable EQ variable .)
+    ;               reduce using rule 30 (condition -> variable EQ variable .)
+    AND             reduce using rule 30 (condition -> variable EQ variable .)
+
+
+state 102
+
+    (27) condition -> variable < variable .
+
+    )               reduce using rule 27 (condition -> variable < variable .)
+    ;               reduce using rule 27 (condition -> variable < variable .)
+    AND             reduce using rule 27 (condition -> variable < variable .)
+
+
+state 103
+
+    (28) condition -> variable > variable .
+
+    )               reduce using rule 28 (condition -> variable > variable .)
+    ;               reduce using rule 28 (condition -> variable > variable .)
+    AND             reduce using rule 28 (condition -> variable > variable .)
+
+
+state 104
+
+    (22) while -> WHILE ( conditions ) { . statements }
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    statements                     shift and go to state 121
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    variable                       shift and go to state 21
+    while                          shift and go to state 26
+    statement                      shift and go to state 14
+    print                          shift and go to state 15
+    class                          shift and go to state 22
+    fn                             shift and go to state 23
+    if                             shift and go to state 8
+
+state 105
+
+    (25) conditions -> condition AND condition .
+
+    ;               reduce using rule 25 (conditions -> condition AND condition .)
+    )               reduce using rule 25 (conditions -> condition AND condition .)
+
+
+state 106
+
+    (63) fn -> DEF VARIABLE ( agg ) . { statements }
+
+    {               shift and go to state 122
+
+
+state 107
+
+    (23) for -> FOR ( assignment ; conditions . ; assignment ) { statements }
+
+    ;               shift and go to state 123
+
+
+state 108
+
+    (16) class -> CLASS VARIABLE { statements } .
+
+    }               reduce using rule 16 (class -> CLASS VARIABLE { statements } .)
+    PRINT           reduce using rule 16 (class -> CLASS VARIABLE { statements } .)
+    IF              reduce using rule 16 (class -> CLASS VARIABLE { statements } .)
+    WHILE           reduce using rule 16 (class -> CLASS VARIABLE { statements } .)
+    BREAK           reduce using rule 16 (class -> CLASS VARIABLE { statements } .)
+    FOR             reduce using rule 16 (class -> CLASS VARIABLE { statements } .)
+    DEF             reduce using rule 16 (class -> CLASS VARIABLE { statements } .)
+    RETURN          reduce using rule 16 (class -> CLASS VARIABLE { statements } .)
+    VARIABLE        reduce using rule 16 (class -> CLASS VARIABLE { statements } .)
+    CLASS           reduce using rule 16 (class -> CLASS VARIABLE { statements } .)
+    NUMBER          reduce using rule 16 (class -> CLASS VARIABLE { statements } .)
+    STR             reduce using rule 16 (class -> CLASS VARIABLE { statements } .)
+    $end            reduce using rule 16 (class -> CLASS VARIABLE { statements } .)
+
+
+state 109
+
+    (36) term -> term * factor .
+
+    *               reduce using rule 36 (term -> term * factor .)
+    /               reduce using rule 36 (term -> term * factor .)
+    IDIV            reduce using rule 36 (term -> term * factor .)
+    +               reduce using rule 36 (term -> term * factor .)
+    -               reduce using rule 36 (term -> term * factor .)
+    PRINT           reduce using rule 36 (term -> term * factor .)
+    IF              reduce using rule 36 (term -> term * factor .)
+    WHILE           reduce using rule 36 (term -> term * factor .)
+    BREAK           reduce using rule 36 (term -> term * factor .)
+    FOR             reduce using rule 36 (term -> term * factor .)
+    DEF             reduce using rule 36 (term -> term * factor .)
+    RETURN          reduce using rule 36 (term -> term * factor .)
+    VARIABLE        reduce using rule 36 (term -> term * factor .)
+    CLASS           reduce using rule 36 (term -> term * factor .)
+    NUMBER          reduce using rule 36 (term -> term * factor .)
+    STR             reduce using rule 36 (term -> term * factor .)
+    $end            reduce using rule 36 (term -> term * factor .)
+    ;               reduce using rule 36 (term -> term * factor .)
+    }               reduce using rule 36 (term -> term * factor .)
+    )               reduce using rule 36 (term -> term * factor .)
+
+
+state 110
+
+    (38) term -> term IDIV factor .
+
+    *               reduce using rule 38 (term -> term IDIV factor .)
+    /               reduce using rule 38 (term -> term IDIV factor .)
+    IDIV            reduce using rule 38 (term -> term IDIV factor .)
+    +               reduce using rule 38 (term -> term IDIV factor .)
+    -               reduce using rule 38 (term -> term IDIV factor .)
+    PRINT           reduce using rule 38 (term -> term IDIV factor .)
+    IF              reduce using rule 38 (term -> term IDIV factor .)
+    WHILE           reduce using rule 38 (term -> term IDIV factor .)
+    BREAK           reduce using rule 38 (term -> term IDIV factor .)
+    FOR             reduce using rule 38 (term -> term IDIV factor .)
+    DEF             reduce using rule 38 (term -> term IDIV factor .)
+    RETURN          reduce using rule 38 (term -> term IDIV factor .)
+    VARIABLE        reduce using rule 38 (term -> term IDIV factor .)
+    CLASS           reduce using rule 38 (term -> term IDIV factor .)
+    NUMBER          reduce using rule 38 (term -> term IDIV factor .)
+    STR             reduce using rule 38 (term -> term IDIV factor .)
+    $end            reduce using rule 38 (term -> term IDIV factor .)
+    ;               reduce using rule 38 (term -> term IDIV factor .)
+    }               reduce using rule 38 (term -> term IDIV factor .)
+    )               reduce using rule 38 (term -> term IDIV factor .)
+
+
+state 111
+
+    (37) term -> term / factor .
+
+    *               reduce using rule 37 (term -> term / factor .)
+    /               reduce using rule 37 (term -> term / factor .)
+    IDIV            reduce using rule 37 (term -> term / factor .)
+    +               reduce using rule 37 (term -> term / factor .)
+    -               reduce using rule 37 (term -> term / factor .)
+    PRINT           reduce using rule 37 (term -> term / factor .)
+    IF              reduce using rule 37 (term -> term / factor .)
+    WHILE           reduce using rule 37 (term -> term / factor .)
+    BREAK           reduce using rule 37 (term -> term / factor .)
+    FOR             reduce using rule 37 (term -> term / factor .)
+    DEF             reduce using rule 37 (term -> term / factor .)
+    RETURN          reduce using rule 37 (term -> term / factor .)
+    VARIABLE        reduce using rule 37 (term -> term / factor .)
+    CLASS           reduce using rule 37 (term -> term / factor .)
+    NUMBER          reduce using rule 37 (term -> term / factor .)
+    STR             reduce using rule 37 (term -> term / factor .)
+    $end            reduce using rule 37 (term -> term / factor .)
+    ;               reduce using rule 37 (term -> term / factor .)
+    }               reduce using rule 37 (term -> term / factor .)
+    )               reduce using rule 37 (term -> term / factor .)
+
+
+state 112
+
+    (33) expr -> expr + term .
+    (36) term -> term . * factor
+    (37) term -> term . / factor
+    (38) term -> term . IDIV factor
+
+    +               reduce using rule 33 (expr -> expr + term .)
+    -               reduce using rule 33 (expr -> expr + term .)
+    PRINT           reduce using rule 33 (expr -> expr + term .)
+    IF              reduce using rule 33 (expr -> expr + term .)
+    WHILE           reduce using rule 33 (expr -> expr + term .)
+    BREAK           reduce using rule 33 (expr -> expr + term .)
+    FOR             reduce using rule 33 (expr -> expr + term .)
+    DEF             reduce using rule 33 (expr -> expr + term .)
+    RETURN          reduce using rule 33 (expr -> expr + term .)
+    VARIABLE        reduce using rule 33 (expr -> expr + term .)
+    CLASS           reduce using rule 33 (expr -> expr + term .)
+    NUMBER          reduce using rule 33 (expr -> expr + term .)
+    STR             reduce using rule 33 (expr -> expr + term .)
+    $end            reduce using rule 33 (expr -> expr + term .)
+    ;               reduce using rule 33 (expr -> expr + term .)
+    }               reduce using rule 33 (expr -> expr + term .)
+    )               reduce using rule 33 (expr -> expr + term .)
+    *               shift and go to state 85
+    /               shift and go to state 87
+    IDIV            shift and go to state 86
+
+
+state 113
+
+    (34) expr -> expr - term .
+    (36) term -> term . * factor
+    (37) term -> term . / factor
+    (38) term -> term . IDIV factor
+
+    +               reduce using rule 34 (expr -> expr - term .)
+    -               reduce using rule 34 (expr -> expr - term .)
+    PRINT           reduce using rule 34 (expr -> expr - term .)
+    IF              reduce using rule 34 (expr -> expr - term .)
+    WHILE           reduce using rule 34 (expr -> expr - term .)
+    BREAK           reduce using rule 34 (expr -> expr - term .)
+    FOR             reduce using rule 34 (expr -> expr - term .)
+    DEF             reduce using rule 34 (expr -> expr - term .)
+    RETURN          reduce using rule 34 (expr -> expr - term .)
+    VARIABLE        reduce using rule 34 (expr -> expr - term .)
+    CLASS           reduce using rule 34 (expr -> expr - term .)
+    NUMBER          reduce using rule 34 (expr -> expr - term .)
+    STR             reduce using rule 34 (expr -> expr - term .)
+    $end            reduce using rule 34 (expr -> expr - term .)
+    ;               reduce using rule 34 (expr -> expr - term .)
+    }               reduce using rule 34 (expr -> expr - term .)
+    )               reduce using rule 34 (expr -> expr - term .)
+    *               shift and go to state 85
+    /               shift and go to state 87
+    IDIV            shift and go to state 86
+
+
+state 114
+
+    (51) assignment -> variable = LEN ( VARIABLE . )
+
+    )               shift and go to state 124
+
+
+state 115
+
+    (53) assignment -> variable = VARIABLE ( agg . )
+
+    )               shift and go to state 125
+
+
+state 116
+
+    (52) assignment -> variable = VARIABLE [ VARIABLE . ]
+    (44) variable -> VARIABLE . [ variable ]
+    (45) variable -> VARIABLE .
+    (15) visit -> VARIABLE . . VARIABLE
+
+  ! shift/reduce conflict for ] resolved as shift
+    ]               shift and go to state 126
+    [               shift and go to state 30
+    .               shift and go to state 72
+
+  ! ]               [ reduce using rule 45 (variable -> VARIABLE .) ]
+
+
+state 117
+
+    (41) factor -> ( expr ) .
+
+    *               reduce using rule 41 (factor -> ( expr ) .)
+    /               reduce using rule 41 (factor -> ( expr ) .)
+    IDIV            reduce using rule 41 (factor -> ( expr ) .)
+    +               reduce using rule 41 (factor -> ( expr ) .)
+    -               reduce using rule 41 (factor -> ( expr ) .)
+    PRINT           reduce using rule 41 (factor -> ( expr ) .)
+    IF              reduce using rule 41 (factor -> ( expr ) .)
+    WHILE           reduce using rule 41 (factor -> ( expr ) .)
+    BREAK           reduce using rule 41 (factor -> ( expr ) .)
+    FOR             reduce using rule 41 (factor -> ( expr ) .)
+    DEF             reduce using rule 41 (factor -> ( expr ) .)
+    RETURN          reduce using rule 41 (factor -> ( expr ) .)
+    VARIABLE        reduce using rule 41 (factor -> ( expr ) .)
+    CLASS           reduce using rule 41 (factor -> ( expr ) .)
+    NUMBER          reduce using rule 41 (factor -> ( expr ) .)
+    STR             reduce using rule 41 (factor -> ( expr ) .)
+    $end            reduce using rule 41 (factor -> ( expr ) .)
+    ;               reduce using rule 41 (factor -> ( expr ) .)
+    }               reduce using rule 41 (factor -> ( expr ) .)
+    )               reduce using rule 41 (factor -> ( expr ) .)
+
+
+state 118
+
+    (50) assignment -> variable = [ agg ] .
+
+    }               reduce using rule 50 (assignment -> variable = [ agg ] .)
+    PRINT           reduce using rule 50 (assignment -> variable = [ agg ] .)
+    IF              reduce using rule 50 (assignment -> variable = [ agg ] .)
+    WHILE           reduce using rule 50 (assignment -> variable = [ agg ] .)
+    BREAK           reduce using rule 50 (assignment -> variable = [ agg ] .)
+    FOR             reduce using rule 50 (assignment -> variable = [ agg ] .)
+    DEF             reduce using rule 50 (assignment -> variable = [ agg ] .)
+    RETURN          reduce using rule 50 (assignment -> variable = [ agg ] .)
+    VARIABLE        reduce using rule 50 (assignment -> variable = [ agg ] .)
+    CLASS           reduce using rule 50 (assignment -> variable = [ agg ] .)
+    NUMBER          reduce using rule 50 (assignment -> variable = [ agg ] .)
+    STR             reduce using rule 50 (assignment -> variable = [ agg ] .)
+    $end            reduce using rule 50 (assignment -> variable = [ agg ] .)
+    ;               reduce using rule 50 (assignment -> variable = [ agg ] .)
+    )               reduce using rule 50 (assignment -> variable = [ agg ] .)
+
+
+state 119
+
+    (17) if -> IF ( condition ) { . statements } elseif
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    statements                     shift and go to state 127
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    print                          shift and go to state 15
+    while                          shift and go to state 26
+    variable                       shift and go to state 21
+    fn                             shift and go to state 23
+    statement                      shift and go to state 14
+    class                          shift and go to state 22
+    if                             shift and go to state 8
+
+state 120
+
+    (65) invoke -> VARIABLE . VARIABLE ( agg ) .
+
+    }               reduce using rule 65 (invoke -> VARIABLE . VARIABLE ( agg ) .)
+    PRINT           reduce using rule 65 (invoke -> VARIABLE . VARIABLE ( agg ) .)
+    IF              reduce using rule 65 (invoke -> VARIABLE . VARIABLE ( agg ) .)
+    WHILE           reduce using rule 65 (invoke -> VARIABLE . VARIABLE ( agg ) .)
+    BREAK           reduce using rule 65 (invoke -> VARIABLE . VARIABLE ( agg ) .)
+    FOR             reduce using rule 65 (invoke -> VARIABLE . VARIABLE ( agg ) .)
+    DEF             reduce using rule 65 (invoke -> VARIABLE . VARIABLE ( agg ) .)
+    RETURN          reduce using rule 65 (invoke -> VARIABLE . VARIABLE ( agg ) .)
+    VARIABLE        reduce using rule 65 (invoke -> VARIABLE . VARIABLE ( agg ) .)
+    CLASS           reduce using rule 65 (invoke -> VARIABLE . VARIABLE ( agg ) .)
+    NUMBER          reduce using rule 65 (invoke -> VARIABLE . VARIABLE ( agg ) .)
+    STR             reduce using rule 65 (invoke -> VARIABLE . VARIABLE ( agg ) .)
+    $end            reduce using rule 65 (invoke -> VARIABLE . VARIABLE ( agg ) .)
+
+
+state 121
+
+    (22) while -> WHILE ( conditions ) { statements . }
+    (2) statements -> statements . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    }               shift and go to state 128
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    variable                       shift and go to state 21
+    while                          shift and go to state 26
+    statement                      shift and go to state 27
+    print                          shift and go to state 15
+    class                          shift and go to state 22
+    fn                             shift and go to state 23
+    if                             shift and go to state 8
+
+state 122
+
+    (63) fn -> DEF VARIABLE ( agg ) { . statements }
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    statements                     shift and go to state 129
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    variable                       shift and go to state 21
+    while                          shift and go to state 26
+    statement                      shift and go to state 14
+    print                          shift and go to state 15
+    class                          shift and go to state 22
+    fn                             shift and go to state 23
+    if                             shift and go to state 8
+
+state 123
+
+    (23) for -> FOR ( assignment ; conditions ; . assignment ) { statements }
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    assignment                     shift and go to state 130
+    visit                          shift and go to state 46
+    variable                       shift and go to state 21
+
+state 124
+
+    (51) assignment -> variable = LEN ( VARIABLE ) .
+
+    }               reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+    PRINT           reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+    IF              reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+    WHILE           reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+    BREAK           reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+    FOR             reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+    DEF             reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+    RETURN          reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+    VARIABLE        reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+    CLASS           reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+    NUMBER          reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+    STR             reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+    $end            reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+    ;               reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+    )               reduce using rule 51 (assignment -> variable = LEN ( VARIABLE ) .)
+
+
+state 125
+
+    (53) assignment -> variable = VARIABLE ( agg ) .
+
+    }               reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+    PRINT           reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+    IF              reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+    WHILE           reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+    BREAK           reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+    FOR             reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+    DEF             reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+    RETURN          reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+    VARIABLE        reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+    CLASS           reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+    NUMBER          reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+    STR             reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+    $end            reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+    ;               reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+    )               reduce using rule 53 (assignment -> variable = VARIABLE ( agg ) .)
+
+
+state 126
+
+    (52) assignment -> variable = VARIABLE [ VARIABLE ] .
+
+    }               reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+    PRINT           reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+    IF              reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+    WHILE           reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+    BREAK           reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+    FOR             reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+    DEF             reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+    RETURN          reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+    VARIABLE        reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+    CLASS           reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+    NUMBER          reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+    STR             reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+    $end            reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+    ;               reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+    )               reduce using rule 52 (assignment -> variable = VARIABLE [ VARIABLE ] .)
+
+
+state 127
+
+    (17) if -> IF ( condition ) { statements . } elseif
+    (2) statements -> statements . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    }               shift and go to state 131
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    print                          shift and go to state 15
+    while                          shift and go to state 26
+    variable                       shift and go to state 21
+    fn                             shift and go to state 23
+    statement                      shift and go to state 27
+    class                          shift and go to state 22
+    if                             shift and go to state 8
+
+state 128
+
+    (22) while -> WHILE ( conditions ) { statements } .
+
+    }               reduce using rule 22 (while -> WHILE ( conditions ) { statements } .)
+    PRINT           reduce using rule 22 (while -> WHILE ( conditions ) { statements } .)
+    IF              reduce using rule 22 (while -> WHILE ( conditions ) { statements } .)
+    WHILE           reduce using rule 22 (while -> WHILE ( conditions ) { statements } .)
+    BREAK           reduce using rule 22 (while -> WHILE ( conditions ) { statements } .)
+    FOR             reduce using rule 22 (while -> WHILE ( conditions ) { statements } .)
+    DEF             reduce using rule 22 (while -> WHILE ( conditions ) { statements } .)
+    RETURN          reduce using rule 22 (while -> WHILE ( conditions ) { statements } .)
+    VARIABLE        reduce using rule 22 (while -> WHILE ( conditions ) { statements } .)
+    CLASS           reduce using rule 22 (while -> WHILE ( conditions ) { statements } .)
+    NUMBER          reduce using rule 22 (while -> WHILE ( conditions ) { statements } .)
+    STR             reduce using rule 22 (while -> WHILE ( conditions ) { statements } .)
+    $end            reduce using rule 22 (while -> WHILE ( conditions ) { statements } .)
+
+
+state 129
+
+    (63) fn -> DEF VARIABLE ( agg ) { statements . }
+    (2) statements -> statements . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    }               shift and go to state 132
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    variable                       shift and go to state 21
+    while                          shift and go to state 26
+    statement                      shift and go to state 27
+    print                          shift and go to state 15
+    class                          shift and go to state 22
+    fn                             shift and go to state 23
+    if                             shift and go to state 8
+
+state 130
+
+    (23) for -> FOR ( assignment ; conditions ; assignment . ) { statements }
+
+    )               shift and go to state 133
+
+
+state 131
+
+    (17) if -> IF ( condition ) { statements } . elseif
+    (18) elseif -> . ELIF ( condition ) { statements } elseif
+    (19) elseif -> . else
+    (20) else -> . ELSE { statements }
+    (21) else -> . empty
+    (66) empty -> .
+
+    ELIF            shift and go to state 134
+    ELSE            shift and go to state 138
+    PRINT           reduce using rule 66 (empty -> .)
+    IF              reduce using rule 66 (empty -> .)
+    WHILE           reduce using rule 66 (empty -> .)
+    BREAK           reduce using rule 66 (empty -> .)
+    FOR             reduce using rule 66 (empty -> .)
+    DEF             reduce using rule 66 (empty -> .)
+    RETURN          reduce using rule 66 (empty -> .)
+    VARIABLE        reduce using rule 66 (empty -> .)
+    CLASS           reduce using rule 66 (empty -> .)
+    NUMBER          reduce using rule 66 (empty -> .)
+    STR             reduce using rule 66 (empty -> .)
+    $end            reduce using rule 66 (empty -> .)
+    }               reduce using rule 66 (empty -> .)
+
+    elseif                         shift and go to state 137
+    empty                          shift and go to state 136
+    else                           shift and go to state 135
+
+state 132
+
+    (63) fn -> DEF VARIABLE ( agg ) { statements } .
+
+    }               reduce using rule 63 (fn -> DEF VARIABLE ( agg ) { statements } .)
+    PRINT           reduce using rule 63 (fn -> DEF VARIABLE ( agg ) { statements } .)
+    IF              reduce using rule 63 (fn -> DEF VARIABLE ( agg ) { statements } .)
+    WHILE           reduce using rule 63 (fn -> DEF VARIABLE ( agg ) { statements } .)
+    BREAK           reduce using rule 63 (fn -> DEF VARIABLE ( agg ) { statements } .)
+    FOR             reduce using rule 63 (fn -> DEF VARIABLE ( agg ) { statements } .)
+    DEF             reduce using rule 63 (fn -> DEF VARIABLE ( agg ) { statements } .)
+    RETURN          reduce using rule 63 (fn -> DEF VARIABLE ( agg ) { statements } .)
+    VARIABLE        reduce using rule 63 (fn -> DEF VARIABLE ( agg ) { statements } .)
+    CLASS           reduce using rule 63 (fn -> DEF VARIABLE ( agg ) { statements } .)
+    NUMBER          reduce using rule 63 (fn -> DEF VARIABLE ( agg ) { statements } .)
+    STR             reduce using rule 63 (fn -> DEF VARIABLE ( agg ) { statements } .)
+    $end            reduce using rule 63 (fn -> DEF VARIABLE ( agg ) { statements } .)
+
+
+state 133
+
+    (23) for -> FOR ( assignment ; conditions ; assignment ) . { statements }
+
+    {               shift and go to state 139
+
+
+state 134
+
+    (18) elseif -> ELIF . ( condition ) { statements } elseif
+
+    (               shift and go to state 140
+
+
+state 135
+
+    (19) elseif -> else .
+
+    PRINT           reduce using rule 19 (elseif -> else .)
+    IF              reduce using rule 19 (elseif -> else .)
+    WHILE           reduce using rule 19 (elseif -> else .)
+    BREAK           reduce using rule 19 (elseif -> else .)
+    FOR             reduce using rule 19 (elseif -> else .)
+    DEF             reduce using rule 19 (elseif -> else .)
+    RETURN          reduce using rule 19 (elseif -> else .)
+    VARIABLE        reduce using rule 19 (elseif -> else .)
+    CLASS           reduce using rule 19 (elseif -> else .)
+    NUMBER          reduce using rule 19 (elseif -> else .)
+    STR             reduce using rule 19 (elseif -> else .)
+    $end            reduce using rule 19 (elseif -> else .)
+    }               reduce using rule 19 (elseif -> else .)
+
+
+state 136
+
+    (21) else -> empty .
+
+    PRINT           reduce using rule 21 (else -> empty .)
+    IF              reduce using rule 21 (else -> empty .)
+    WHILE           reduce using rule 21 (else -> empty .)
+    BREAK           reduce using rule 21 (else -> empty .)
+    FOR             reduce using rule 21 (else -> empty .)
+    DEF             reduce using rule 21 (else -> empty .)
+    RETURN          reduce using rule 21 (else -> empty .)
+    VARIABLE        reduce using rule 21 (else -> empty .)
+    CLASS           reduce using rule 21 (else -> empty .)
+    NUMBER          reduce using rule 21 (else -> empty .)
+    STR             reduce using rule 21 (else -> empty .)
+    $end            reduce using rule 21 (else -> empty .)
+    }               reduce using rule 21 (else -> empty .)
+
+
+state 137
+
+    (17) if -> IF ( condition ) { statements } elseif .
+
+    }               reduce using rule 17 (if -> IF ( condition ) { statements } elseif .)
+    PRINT           reduce using rule 17 (if -> IF ( condition ) { statements } elseif .)
+    IF              reduce using rule 17 (if -> IF ( condition ) { statements } elseif .)
+    WHILE           reduce using rule 17 (if -> IF ( condition ) { statements } elseif .)
+    BREAK           reduce using rule 17 (if -> IF ( condition ) { statements } elseif .)
+    FOR             reduce using rule 17 (if -> IF ( condition ) { statements } elseif .)
+    DEF             reduce using rule 17 (if -> IF ( condition ) { statements } elseif .)
+    RETURN          reduce using rule 17 (if -> IF ( condition ) { statements } elseif .)
+    VARIABLE        reduce using rule 17 (if -> IF ( condition ) { statements } elseif .)
+    CLASS           reduce using rule 17 (if -> IF ( condition ) { statements } elseif .)
+    NUMBER          reduce using rule 17 (if -> IF ( condition ) { statements } elseif .)
+    STR             reduce using rule 17 (if -> IF ( condition ) { statements } elseif .)
+    $end            reduce using rule 17 (if -> IF ( condition ) { statements } elseif .)
+
+
+state 138
+
+    (20) else -> ELSE . { statements }
+
+    {               shift and go to state 141
+
+
+state 139
+
+    (23) for -> FOR ( assignment ; conditions ; assignment ) { . statements }
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    statements                     shift and go to state 142
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    variable                       shift and go to state 21
+    while                          shift and go to state 26
+    statement                      shift and go to state 14
+    print                          shift and go to state 15
+    class                          shift and go to state 22
+    fn                             shift and go to state 23
+    if                             shift and go to state 8
+
+state 140
+
+    (18) elseif -> ELIF ( . condition ) { statements } elseif
+    (26) condition -> . variable LEQ variable
+    (27) condition -> . variable < variable
+    (28) condition -> . variable > variable
+    (29) condition -> . variable GEQ variable
+    (30) condition -> . variable EQ variable
+    (31) condition -> . variable NEQ variable
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+    (15) visit -> . VARIABLE . VARIABLE
+
+    VARIABLE        shift and go to state 48
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    variable                       shift and go to state 49
+    condition                      shift and go to state 143
+    visit                          shift and go to state 46
+
+state 141
+
+    (20) else -> ELSE { . statements }
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    statements                     shift and go to state 144
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    variable                       shift and go to state 21
+    while                          shift and go to state 26
+    statement                      shift and go to state 14
+    print                          shift and go to state 15
+    class                          shift and go to state 22
+    fn                             shift and go to state 23
+    if                             shift and go to state 8
+
+state 142
+
+    (23) for -> FOR ( assignment ; conditions ; assignment ) { statements . }
+    (2) statements -> statements . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    }               shift and go to state 145
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    variable                       shift and go to state 21
+    while                          shift and go to state 26
+    statement                      shift and go to state 27
+    print                          shift and go to state 15
+    class                          shift and go to state 22
+    fn                             shift and go to state 23
+    if                             shift and go to state 8
+
+state 143
+
+    (18) elseif -> ELIF ( condition . ) { statements } elseif
+
+    )               shift and go to state 146
+
+
+state 144
+
+    (20) else -> ELSE { statements . }
+    (2) statements -> statements . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    }               shift and go to state 147
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    variable                       shift and go to state 21
+    while                          shift and go to state 26
+    statement                      shift and go to state 27
+    print                          shift and go to state 15
+    class                          shift and go to state 22
+    fn                             shift and go to state 23
+    if                             shift and go to state 8
+
+state 145
+
+    (23) for -> FOR ( assignment ; conditions ; assignment ) { statements } .
+
+    }               reduce using rule 23 (for -> FOR ( assignment ; conditions ; assignment ) { statements } .)
+    PRINT           reduce using rule 23 (for -> FOR ( assignment ; conditions ; assignment ) { statements } .)
+    IF              reduce using rule 23 (for -> FOR ( assignment ; conditions ; assignment ) { statements } .)
+    WHILE           reduce using rule 23 (for -> FOR ( assignment ; conditions ; assignment ) { statements } .)
+    BREAK           reduce using rule 23 (for -> FOR ( assignment ; conditions ; assignment ) { statements } .)
+    FOR             reduce using rule 23 (for -> FOR ( assignment ; conditions ; assignment ) { statements } .)
+    DEF             reduce using rule 23 (for -> FOR ( assignment ; conditions ; assignment ) { statements } .)
+    RETURN          reduce using rule 23 (for -> FOR ( assignment ; conditions ; assignment ) { statements } .)
+    VARIABLE        reduce using rule 23 (for -> FOR ( assignment ; conditions ; assignment ) { statements } .)
+    CLASS           reduce using rule 23 (for -> FOR ( assignment ; conditions ; assignment ) { statements } .)
+    NUMBER          reduce using rule 23 (for -> FOR ( assignment ; conditions ; assignment ) { statements } .)
+    STR             reduce using rule 23 (for -> FOR ( assignment ; conditions ; assignment ) { statements } .)
+    $end            reduce using rule 23 (for -> FOR ( assignment ; conditions ; assignment ) { statements } .)
+
+
+state 146
+
+    (18) elseif -> ELIF ( condition ) . { statements } elseif
+
+    {               shift and go to state 148
+
+
+state 147
+
+    (20) else -> ELSE { statements } .
+
+    PRINT           reduce using rule 20 (else -> ELSE { statements } .)
+    IF              reduce using rule 20 (else -> ELSE { statements } .)
+    WHILE           reduce using rule 20 (else -> ELSE { statements } .)
+    BREAK           reduce using rule 20 (else -> ELSE { statements } .)
+    FOR             reduce using rule 20 (else -> ELSE { statements } .)
+    DEF             reduce using rule 20 (else -> ELSE { statements } .)
+    RETURN          reduce using rule 20 (else -> ELSE { statements } .)
+    VARIABLE        reduce using rule 20 (else -> ELSE { statements } .)
+    CLASS           reduce using rule 20 (else -> ELSE { statements } .)
+    NUMBER          reduce using rule 20 (else -> ELSE { statements } .)
+    STR             reduce using rule 20 (else -> ELSE { statements } .)
+    $end            reduce using rule 20 (else -> ELSE { statements } .)
+    }               reduce using rule 20 (else -> ELSE { statements } .)
+
+
+state 148
+
+    (18) elseif -> ELIF ( condition ) { . statements } elseif
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    statements                     shift and go to state 149
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    print                          shift and go to state 15
+    while                          shift and go to state 26
+    variable                       shift and go to state 21
+    fn                             shift and go to state 23
+    statement                      shift and go to state 14
+    class                          shift and go to state 22
+    if                             shift and go to state 8
+
+state 149
+
+    (18) elseif -> ELIF ( condition ) { statements . } elseif
+    (2) statements -> statements . statement
+    (4) statement -> . assignment
+    (5) statement -> . print
+    (6) statement -> . if
+    (7) statement -> . while
+    (8) statement -> . break
+    (9) statement -> . for
+    (10) statement -> . fn
+    (11) statement -> . ret
+    (12) statement -> . invoke
+    (13) statement -> . class
+    (14) statement -> . visit
+    (49) assignment -> . variable = expr
+    (50) assignment -> . variable = [ agg ]
+    (51) assignment -> . variable = LEN ( VARIABLE )
+    (52) assignment -> . variable = VARIABLE [ VARIABLE ]
+    (53) assignment -> . variable = VARIABLE ( agg )
+    (62) print -> . PRINT ( agg )
+    (17) if -> . IF ( condition ) { statements } elseif
+    (22) while -> . WHILE ( conditions ) { statements }
+    (32) break -> . BREAK
+    (23) for -> . FOR ( assignment ; conditions ; assignment ) { statements }
+    (63) fn -> . DEF VARIABLE ( agg ) { statements }
+    (42) ret -> . RETURN VARIABLE
+    (43) ret -> . RETURN
+    (64) invoke -> . VARIABLE ( agg )
+    (65) invoke -> . VARIABLE . VARIABLE ( agg )
+    (16) class -> . CLASS VARIABLE { statements }
+    (15) visit -> . VARIABLE . VARIABLE
+    (44) variable -> . VARIABLE [ variable ]
+    (45) variable -> . VARIABLE
+    (46) variable -> . NUMBER
+    (47) variable -> . STR
+    (48) variable -> . visit
+
+    }               shift and go to state 150
+    PRINT           shift and go to state 5
+    IF              shift and go to state 24
+    WHILE           shift and go to state 4
+    BREAK           shift and go to state 25
+    FOR             shift and go to state 9
+    DEF             shift and go to state 7
+    RETURN          shift and go to state 6
+    VARIABLE        shift and go to state 3
+    CLASS           shift and go to state 16
+    NUMBER          shift and go to state 2
+    STR             shift and go to state 20
+
+    invoke                         shift and go to state 17
+    for                            shift and go to state 10
+    assignment                     shift and go to state 18
+    visit                          shift and go to state 11
+    ret                            shift and go to state 12
+    break                          shift and go to state 19
+    print                          shift and go to state 15
+    while                          shift and go to state 26
+    variable                       shift and go to state 21
+    fn                             shift and go to state 23
+    statement                      shift and go to state 27
+    class                          shift and go to state 22
+    if                             shift and go to state 8
+
+state 150
+
+    (18) elseif -> ELIF ( condition ) { statements } . elseif
+    (18) elseif -> . ELIF ( condition ) { statements } elseif
+    (19) elseif -> . else
+    (20) else -> . ELSE { statements }
+    (21) else -> . empty
+    (66) empty -> .
+
+    ELIF            shift and go to state 134
+    ELSE            shift and go to state 138
+    PRINT           reduce using rule 66 (empty -> .)
+    IF              reduce using rule 66 (empty -> .)
+    WHILE           reduce using rule 66 (empty -> .)
+    BREAK           reduce using rule 66 (empty -> .)
+    FOR             reduce using rule 66 (empty -> .)
+    DEF             reduce using rule 66 (empty -> .)
+    RETURN          reduce using rule 66 (empty -> .)
+    VARIABLE        reduce using rule 66 (empty -> .)
+    CLASS           reduce using rule 66 (empty -> .)
+    NUMBER          reduce using rule 66 (empty -> .)
+    STR             reduce using rule 66 (empty -> .)
+    $end            reduce using rule 66 (empty -> .)
+    }               reduce using rule 66 (empty -> .)
+
+    elseif                         shift and go to state 151
+    empty                          shift and go to state 136
+    else                           shift and go to state 135
+
+state 151
+
+    (18) elseif -> ELIF ( condition ) { statements } elseif .
+
+    PRINT           reduce using rule 18 (elseif -> ELIF ( condition ) { statements } elseif .)
+    IF              reduce using rule 18 (elseif -> ELIF ( condition ) { statements } elseif .)
+    WHILE           reduce using rule 18 (elseif -> ELIF ( condition ) { statements } elseif .)
+    BREAK           reduce using rule 18 (elseif -> ELIF ( condition ) { statements } elseif .)
+    FOR             reduce using rule 18 (elseif -> ELIF ( condition ) { statements } elseif .)
+    DEF             reduce using rule 18 (elseif -> ELIF ( condition ) { statements } elseif .)
+    RETURN          reduce using rule 18 (elseif -> ELIF ( condition ) { statements } elseif .)
+    VARIABLE        reduce using rule 18 (elseif -> ELIF ( condition ) { statements } elseif .)
+    CLASS           reduce using rule 18 (elseif -> ELIF ( condition ) { statements } elseif .)
+    NUMBER          reduce using rule 18 (elseif -> ELIF ( condition ) { statements } elseif .)
+    STR             reduce using rule 18 (elseif -> ELIF ( condition ) { statements } elseif .)
+    $end            reduce using rule 18 (elseif -> ELIF ( condition ) { statements } elseif .)
+    }               reduce using rule 18 (elseif -> ELIF ( condition ) { statements } elseif .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for VARIABLE in state 6 resolved as shift
+WARNING: shift/reduce conflict for ] in state 116 resolved as shift
+WARNING: reduce/reduce conflict in state 39 resolved using rule (agg -> NUMBER)
+WARNING: rejected rule (empty -> <empty>) in state 39
+WARNING: reduce/reduce conflict in state 42 resolved using rule (agg -> STR)
+WARNING: rejected rule (empty -> <empty>) in state 42
+WARNING: reduce/reduce conflict in state 43 resolved using rule (agg -> VARIABLE)
+WARNING: rejected rule (empty -> <empty>) in state 43

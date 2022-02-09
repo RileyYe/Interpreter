@@ -1,0 +1,25 @@
+class Student{
+	def __init__(self,name,age,score){
+		self.name=name
+		self.age=age
+		self.score=score
+	}
+
+	def add_score(self,score){
+		self.score=self.score+score
+	}
+
+	def sprint_info(self){
+	    name = self.name
+	    age = self.age
+	    score = self.score
+		print(name, age, score)
+	}
+}
+n = 'xiaoming'
+age = 12
+score = 20
+a=Student(a, n ,age,score)
+score = 60
+a.add_score(a, score)
+a.sprint_info(a)
